@@ -1,7 +1,11 @@
+/*
+入口文件
+*/
 let port = 8000;//启动端口号
 //创建app服务;
 let express = require('express'),
-    swig = require('swig'); //加载模版
+    swig = require('swig'), //加载模版
+    mongoose = require('mongoose');//加载数据库
 let app = express();
 
 //静态文件托管
@@ -14,19 +18,25 @@ app.set('views','./views');
 //注册模版引擎
 app.set('view engine', 'html');
 swig.setDefaults({cache: false});//取消模版缓存
-app.get('/', (req, res, next)=> {
-
-  res.render('index');//读取views目录下的文件
-})
+// app.get('/', (req, res, next)=> {
+//
+//   res.render('index');//读取views目录下的文件
+// })
 //划分模块
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
-// app.use('/', require('./routers/main'));
+app.use('/', require('./routers/main'));
 
 
-
-//监听http请求,port 端口
-app.listen(port);
+mongoose.connect('mongodb://localhost:27017/blog', function (err) {
+  if(err) {
+    console.log('数据库链接失败');
+  } else {
+    console.log('数据库链接成功');
+    //监听http请求,port 端口
+    app.listen(port);
+  }
+});
 
 
 
