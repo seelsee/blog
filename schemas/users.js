@@ -1,6 +1,6 @@
-let mongoose = require('moogoose');
+let mongoose = require('mongoose');
 //用户表结构
-moule.exports = new mongoose.Schema({
+module.exports = new mongoose.Schema({
   //用户名
   username: String,
   //密码

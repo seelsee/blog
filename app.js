@@ -5,7 +5,8 @@ let port = 8000;//启动端口号
 //创建app服务;
 let express = require('express'),
     swig = require('swig'), //加载模版
-    mongoose = require('mongoose');//加载数据库
+    mongoose = require('mongoose'),//加载数据库
+    bodyParser = require('body-parser');//加载body-parser,处理post提交的数据
 let app = express();
 
 //静态文件托管
@@ -22,10 +23,16 @@ swig.setDefaults({cache: false});//取消模版缓存
 //
 //   res.render('index');//读取views目录下的文件
 // })
+
+//body-parser设置
+app.use(bodyParser.urlencoded({extended: true}))
 //划分模块
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
 app.use('/', require('./routers/main'));
+
+
+
 
 
 mongoose.connect('mongodb://localhost:27017/blog', function (err) {
