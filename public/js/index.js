@@ -1,18 +1,20 @@
-console.log(1);
 let register = document.querySelector('.register'),
-    reuser = document.querySelector('#reuser'),
-    repassword = document.querySelector('#password'),
-    rerepassword = document.querySelector('#repassword');
-console.log(repassword.value);
+    upuser = document.querySelector('#upuser'),
+    uppassword = document.querySelector('#password'),
+    reuppassword = document.querySelector('#repassword'),
+    inuser = document.querySelector('#inuser'),
+    inpassword = document.querySelector('#inpassword'),
+    login = document.querySelector('.login');
+console.log(upuser.value);
 //注册
 register.addEventListener('click', () => {
   $.ajax({
     type: 'post',
     url: '/api/user/register',
     data: {
-      username: reuser.value,
-      password: repassword.value,
-      repassword: rerepassword.value,
+      username: upuser.value,
+      password: uppassword.value,
+      repassword: reuppassword.value,
     },
     dataType: 'json',
     success: function (result) {
@@ -21,5 +23,20 @@ register.addEventListener('click', () => {
 
     }
   })
-    console.log(2);
+})
+//登陆
+login.addEventListener('click', () => {
+  console.log(upuser.value);
+  $.ajax({
+    type: 'post',
+    url: '/api/user/login',
+    data: {
+      username: inuser.value,
+      password: inpassword.value,
+    },
+    dataType: 'json',
+    success: function (result) {
+      console.log(result);
+    }
+  })
 })
