@@ -1,0 +1,39 @@
+body, div, ul, li, h1, h2, h3, h4, h5, h6, input, form, a, p {
+	margin: 0;
+	padding: 0;
+}
+html, body {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
+	background: #fff;
+	color: #222;
+}
+ol, ul, li, h1, h2, h3, h4, h5, h6 {
+	list-style: none;
+}
+a {
+	color: #222;
+	text-decoration: none;
+	cursor: pointer;
+	outline: 0;
+}
+i, span {
+	font-style: normal;
+	/*font-weight: normal;*/
+}
+input, button, select{
+	font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
+	outline: 0;
+}
+img {
+	cursor: pointer;
+	outline: 0;
+}
+li:after {
+	clear: both;
+}
+ul:after {
+	clear: both;
+}

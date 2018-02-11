@@ -4,9 +4,25 @@ let register = document.querySelector('.register'),
     reuppassword = document.querySelector('#repassword'),
     inuser = document.querySelector('#inuser'),
     inpassword = document.querySelector('#inpassword'),
-    login = document.querySelector('.login');
-console.log(upuser.value);
+    login = document.querySelector('.login'),
+    loginBox = document.querySelector('#loginBox'),
+    registerBox = document.querySelector('#registerBox'),
+    nowUp = document.querySelector('.nowUp'),
+    nowIn = document.querySelector('.nowIn'),
+    loginWarning = document.querySelector('.loginWarning'),
+    reWarning = document.querySelector('.reWarning');
+nowIn.addEventListener('click', _ => {
+  loginBox.style.display = 'block';
+  registerBox.style.display = 'none';
+
+})
+nowUp.addEventListener('click', _ => {
+  loginBox.style.display = 'none';
+  registerBox.style.display = 'block';
+
+})
 //注册
+
 register.addEventListener('click', () => {
   $.ajax({
     type: 'post',
@@ -19,7 +35,14 @@ register.addEventListener('click', () => {
     dataType: 'json',
     success: function (result) {
       console.log(result);//查看返回
-
+      reWarning.innerHTML = result.message;
+      //注册成功
+      if (result.code == 0) {
+        setTimeout(() => {
+          loginBox.style.display = 'block';
+          registerBox.style.display = 'none';
+        }, 1000)
+      }
 
     }
   })
@@ -37,6 +60,12 @@ login.addEventListener('click', () => {
     dataType: 'json',
     success: function (result) {
       console.log(result);
+      //登陆成功
+      if (result.code == 0) {
+        setTimeout(() => {
+
+        }, 1000)
+      }
     }
   })
 })

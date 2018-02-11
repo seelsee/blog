@@ -1,0 +1,14 @@
+.rightBox {
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+}
+#loginBox {
+  position: relative;
+  /* margin-top: -150px; */
+  z-index: 100;
+}
+.nowUp, .nowIn {
+  color: red;
+
+}
