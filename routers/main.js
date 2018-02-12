@@ -1,7 +1,10 @@
 let express = require('express');
     router = express.Router();
 router.get('/', (req, res, next) => {
-  res.render('main/index')
-})
+  console.log(req.userInfo._id);
+  res.render('main/index', {
+    userInfo: req.userInfo
+  });
+});
 
 module.exports = router;

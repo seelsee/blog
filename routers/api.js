@@ -97,13 +97,25 @@ router.post('/user/login', function(req, res) {
       _id: userInfo._id,
       username: userInfo.username
     }
+    //设置Cookies
+    req.cookies.set('userInfo', JSON.stringify({
+      _id: userInfo._id,
+      username: userInfo.username
+    }));
     res.json(responseData);
     return;
   })
 
 })
+//退出
+router.get('/user/logout', (req, res) => {
+  req.cookies.set('userInfo' ,null);
+
+  res.json(responseData);
+})
 
 
+module.exports = router;
 
 
 

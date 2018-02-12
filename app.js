@@ -1,12 +1,13 @@
 /*
 入口文件
 */
-let port = 8000;//启动端口号
+const port = 8000;//启动端口号
 //创建app服务;
 let express = require('express'),
     swig = require('swig'), //加载模版
     mongoose = require('mongoose'),//加载数据库
-    bodyParser = require('body-parser');//加载body-parser,处理post提交的数据
+    bodyParser = require('body-parser'),//加载body-parser,处理post提交的数据
+    Cookies = require('cookies')//加载cookies模块,保存登陆状态
 let app = express();
 
 //静态文件托管
@@ -26,6 +27,22 @@ swig.setDefaults({cache: false});//取消模版缓存
 
 //body-parser设置
 app.use(bodyParser.urlencoded({extended: true}))
+//设置cookie
+app.use((req, res, next) => {
+  req.cookies = new Cookies(req, res);
+  req.userInfo = {};
+  // console.log(req.userInfo);
+  // console.log(typeof req.cookies.get('userInfo'));
+  //解析登陆用户的cookie信息
+  if (req.cookies.get('userInfo')) {
+    try {
+      req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+    } catch (e) {} finally {}
+  }
+  next();
+});
+
+
 //划分模块
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
@@ -34,7 +51,7 @@ app.use('/', require('./routers/main'));
 
 
 
-
+//连接数据库
 mongoose.connect('mongodb://localhost:27017/blog', function (err) {
   if(err) {
     console.log('数据库链接失败');
