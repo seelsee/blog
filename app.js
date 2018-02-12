@@ -7,7 +7,8 @@ let express = require('express'),
     swig = require('swig'), //加载模版
     mongoose = require('mongoose'),//加载数据库
     bodyParser = require('body-parser'),//加载body-parser,处理post提交的数据
-    Cookies = require('cookies')//加载cookies模块,保存登陆状态
+    Cookies = require('cookies'),//加载cookies模块,保存登陆状态
+    User = require('./models/User');
 let app = express();
 
 //静态文件托管
@@ -37,9 +38,18 @@ app.use((req, res, next) => {
   if (req.cookies.get('userInfo')) {
     try {
       req.userInfo = JSON.parse(req.cookies.get('userInfo'));
-    } catch (e) {} finally {}
+      //获取当前登录用户类型,是否是管理员
+      User.findById(req.userInfo._id).then((userInfo) => {
+        req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+        next();
+      })
+    } catch (e) {
+      next();
+    } finally {}
+  } else {
+
+    next();
   }
-  next();
 });
 
 
