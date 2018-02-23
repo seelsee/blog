@@ -253,7 +253,7 @@ router.get('/content', (req, res) => {
 
       let skip = (page - 1) * limit; //忽略条数
       //id 1升序 id -1降序s
-      Content.find().sort({ _id: -1}).limit(limit).skip(skip).then(function (contents) {
+      Content.find().sort({ _id: -1}).limit(limit).skip(skip).populate(['category', 'user']).then((contents) => {
           res.render('admin/content', {
               userInfo: req.userInfo,
               contents: contents,
@@ -303,5 +303,103 @@ router.post('/content/add', (req, res) => {
     return;
   })
 })
+
+
+
+//修改内容
+router.get('/content/edit', (req, res) => {
+  let contentId = req.query.id || '';
+
+  Category.find().sort({_id: -1}).then((categories) => {
+    Content.findOne({
+      _id: contentId
+    }).populate('category').then((content) => {
+      if(!content) {
+        res.render('admin/error', {
+          userinfo: req.userinfo,
+          message: '不存在该内容'
+        });
+      } else {
+        res.render('admin/content_edit', {
+          userinfo: req.userinfo,
+          content: content,
+          categories: categories
+        });
+      }
+    })
+  })
+
+})
+
+//保存内容
+router.post('/content/edit', (res, req) => {
+  let id = req.query.id || '';
+  if (req.body.category == '') {
+    res.render('admin/error', {
+      userinfo: req.userinfo,
+      message: '内容分类不能为空'
+    });
+    return;
+  }
+
+  if (req.body.title == '') {
+    res.render('admin/error', {
+      userinfo: req.userinfo,
+      message: '内容标题不能为空'
+    });
+    return;
+  }
+  Content.update({
+    _id: id
+  }, {
+    category: req.body.category,
+    title: req.body.title,
+    description: req.body.description,
+    content: req.body.content
+  }).then(_ => {
+    res.render('admin/success', {
+      userinfo: req.userinfo,
+      message: '内容更新成功',
+      url: '/admin/content/edit?id=' + id
+    });
+  })
+});
+
+//内容删除
+
+
+
+router.get('/content/delete', (req, res) => {
+  let contentId = req.query.id || '';
+  //数据库是否已经存在该内容
+  Content.findOne({
+    _id: contentId
+  }).then((content) => {
+    if(!content) {
+      res.render('admin/error', {
+        userinfo: req.userinfo,
+        message: '不存在该内容'
+      });
+    } else {
+      Content.remove({
+        _id: contentId
+      }).then(function () {
+        res.render('admin/success', {
+          userinfo: req.userinfo,
+          message: '删除成功',
+          url: '/admin/content'
+        });
+      })
+    }
+  })
+})
+
+
+
+
+
+
+
+
 
 module.exports = router;
