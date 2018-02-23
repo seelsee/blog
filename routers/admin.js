@@ -291,6 +291,7 @@ router.post('/content/add', (req, res) => {
   new Content({
     category: req.body.category,
     title: req.body.title,
+    user: req.userInfo._id.toString(),
     description: req.body.description,
     content: req.body.content
 
@@ -313,7 +314,7 @@ router.get('/content/edit', (req, res) => {
   Category.find().sort({_id: -1}).then((categories) => {
     Content.findOne({
       _id: contentId
-    }).populate('category').then((content) => {
+    }).populate(['category', 'user']).then((content) => {
       if(!content) {
         res.render('admin/error', {
           userinfo: req.userinfo,

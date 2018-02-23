@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 //内容的表结构
 
 module.exports= new mongoose.Schema({
-  //用户
+  //关联字段--用户
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
