@@ -1,7 +1,9 @@
-let express = require('express');
-    router = express.Router();
-let User = require('../models/User'),
-    Category = require('../models/Category')
+const express = require('express');
+      router = express.Router();
+const User = require('../models/User'),
+      Category = require('../models/Category'),
+      Content = require('../models/Content')
+
 router.use((req, res, next) => {
   if (!req.userInfo.isAdmin) {
     //如果当前用户不是管理员
@@ -70,8 +72,8 @@ router.get('/category', (req, res) => {
       page = Math.max(page, 1);
 
       let skip = (page - 1) * limit; //忽略条数
-
-      Category.find().limit(limit).skip(skip).then(function (categories) {
+      //id 1升序 id -1降序s
+      Category.find().sort({ _id: -1}).limit(limit).skip(skip).then(function (categories) {
           res.render('admin/category_index', {
               userInfo: req.userInfo,
               categories: categories,
@@ -232,9 +234,74 @@ router.get('/category/delete', (req, res) => {
   })
 })
 
+//内容首页
+router.get('/content', (req, res) => {
+  let page = Number(req.query.page || 1);
+  let limit = 10;//一页显示几条,可手动更改
 
 
+  let pages=0;
 
+  //获取总记录数
+  Content.count().then(function (count) {
+      //总页数
+      pages =Math.ceil(count / limit);
+      //页码不能超过总页数
+      page = Math.min(page, pages);
+      //页码不能小于1
+      page = Math.max(page, 1);
 
+      let skip = (page - 1) * limit; //忽略条数
+      //id 1升序 id -1降序s
+      Content.find().sort({ _id: -1}).limit(limit).skip(skip).then(function (contents) {
+          res.render('admin/content', {
+              userInfo: req.userInfo,
+              contents: contents,
+              count: count,
+              pages: pages,
+              limit: limit,
+              page: page
+          });
+      });
+  })
+});
+
+//内容添加
+router.get('/content/add', (req, res) => {
+  Category.find().sort({ _id: -1 }).then((categories) => {
+    res.render('admin/content_add', {
+      userInfo: req.userInfo,
+      categories: categories
+    })
+
+  })
+});
+
+//内容保存
+router.post('/content/add', (req, res) => {
+  // console.log(req.body);
+  if (req.body.title == '') {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      message: '内容标题不能为空'
+    })
+    return;
+  }
+  //保存到数据库
+  new Content({
+    category: req.body.category,
+    title: req.body.title,
+    description: req.body.description,
+    content: req.body.content
+
+  }).save().then((result) => {
+    res.render('admin/success', {
+      userInfo: req.userInfo,
+      message: '内容保存成功',
+      url: '/admin/content'
+    })
+    return;
+  })
+})
 
 module.exports = router;

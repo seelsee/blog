@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
+
+  <div class="meau"></div>
+  <a href="/">首页</a>
+  {% for category in categories %}
+  <a href="/">{{category.name}}</a>
+  {% endfor %}
+
   {% if userInfo._id %}
   <div class="rightBox" id="userInfo">
             <div class="title"><span>用户信息</span></div>
