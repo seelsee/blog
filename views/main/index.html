@@ -16,6 +16,67 @@
   <a href="/">{{category.name}}</a>
   {% endfor %}
 
+
+  <div class="mainLeft">
+  {% for content in contents %}
+    <div class="listBox">
+      <h1>{{content.title}}</h1>
+      <p>
+        作者: <span>{{content.user.username}}</span>
+        时间: <span>{{content.addTime|date('Y年m月d日 H:i:s', -8*60)}}</span>
+        阅读: <span>{{content.views}}</span>
+        评论: <span>10</span>
+        <div><p>{{content.description}}</p></div>
+        <div><a href="">阅读全文</a></div>
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+
+
+
+  <ul class="mainIndexPagination">
+    <li>
+        {% if page<=1 %}
+        <span>没有上一页了</span>
+        {% else %}
+        <a href="/?page={{page-1}}">上一页</a>
+        {% endif %}
+      </li>
+      <li>{{page}}/{{pages}}</li>
+      <li>
+         {% if page>= pages %}
+          <span>没有下一页了</span>
+         {% else %}
+         <a href="/?page={{page+1}}">下一页</a>
+         {% endif %}
+      </li>
+   </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   {% if userInfo._id %}
   <div class="rightBox" id="userInfo">
             <div class="title"><span>用户信息</span></div>

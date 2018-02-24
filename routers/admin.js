@@ -237,7 +237,7 @@ router.get('/category/delete', (req, res) => {
 //内容首页
 router.get('/content', (req, res) => {
   let page = Number(req.query.page || 1);
-  let limit = 10;//一页显示几条,可手动更改
+  const limit = 10;//一页显示几条,可手动更改
 
 
   let pages=0;
@@ -253,7 +253,9 @@ router.get('/content', (req, res) => {
 
       let skip = (page - 1) * limit; //忽略条数
       //id 1升序 id -1降序s
-      Content.find().sort({ _id: -1}).limit(limit).skip(skip).populate(['category', 'user']).then((contents) => {
+      Content.find().sort({ _id: -1}).limit(limit).skip(skip).populate(['category', 'user']).sort({
+        addTime: -1
+      }).then((contents) => {
           res.render('admin/content', {
               userInfo: req.userInfo,
               contents: contents,
