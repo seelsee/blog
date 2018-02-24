@@ -7,6 +7,7 @@ router.get('/', (req, res, next) => {
   // console.log(req.userInfo);
   let data = {
     userInfo: req.userInfo,
+    category: req.query.category || '',
     categories: [],
     count: 0,
     page: Number(req.query.page || 1),
@@ -14,14 +15,17 @@ router.get('/', (req, res, next) => {
     pages: 0,
   }
 
-
+  let where = {};
+  if ( data.category) {
+    where.category = data.category
+  }
   //读取所有的分类信息
 
   Category.find().then((categories) => {
 
 
     data.categories = categories;
-    return Content.count();
+    return Content.where(where).count();
 
   }).then((count) => {
 
@@ -33,7 +37,8 @@ router.get('/', (req, res, next) => {
     data.page = Math.max(data.page, 1);
 
     let skip = (data.page - 1) * data.limit; //忽略条数
-    return Content.find().limit(data.limit).skip(skip).populate(['category', 'user']).sort({
+
+    return Content.where(where).find().limit(data.limit).skip(skip).populate(['category', 'user']).sort({
       addTime: -1
     });
 

@@ -12,8 +12,8 @@
 
   <div class="meau"></div>
   <a href="/">首页</a>
-  {% for category in categories %}
-  <a href="/">{{category.name}}</a>
+  {% for cate in categories %}
+  <a href="/?category={{cate.id}}">{{cate.name}}</a>
   {% endfor %}
 
 
@@ -43,15 +43,19 @@
         {% if page<=1 %}
         <span>没有上一页了</span>
         {% else %}
-        <a href="/?page={{page-1}}">上一页</a>
+        <a href="/?category={{category}}&page={{page-1}}">上一页</a>
         {% endif %}
       </li>
+      {% if pages > 0 %}
       <li>{{page}}/{{pages}}</li>
+      {% else %}
+      <div>当前分页没有内容</div>
+      {% endif %}
       <li>
          {% if page>= pages %}
           <span>没有下一页了</span>
          {% else %}
-         <a href="/?page={{page+1}}">下一页</a>
+         <a href="/?category={{category}}&page={{page+1}}">下一页</a>
          {% endif %}
       </li>
    </ul>
