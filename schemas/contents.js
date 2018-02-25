@@ -15,13 +15,12 @@ module.exports= new mongoose.Schema({
     //引用
     ref: 'Category'
   },
-    //数据插入时间
+  //数据插入时间
   addTime: {
     type: Date,
     default: new Date()
   },
-
-    //阅读量
+  //阅读量
   views: {
     type: Number,
     default: 0
@@ -38,6 +37,7 @@ module.exports= new mongoose.Schema({
     type: String,
     default: ''
   },
+  //评论
   comments: {
     type: Array,
     default: []

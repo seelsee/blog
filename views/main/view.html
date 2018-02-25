@@ -22,18 +22,31 @@
             <span class="fl">评论</span>
             <span class="fr">一共有<span id="commentNum"></span>条评论</span>
         </div>
-        {% if userinfo.id %}
+        {% if userInfo._id %}
         <div class="formWrap">
-            <input type="hidden" id="contentId" value="{{content.id}}"/>
-            <textarea  rows="3" class="form-control" name="content" id="content"></textarea>
-            <button type="button" class="btn btn-primary" id="submitCommet">提交</button>
+            <input type="hidden" id="contentId" value="{{content.id}}">
+            <textarea  rows="3" class="form-control" name="content" id="messageContent"></textarea>
+
+            <button type="button" class="btn btn-primary" id="submitComment">提交</button>
         </div>
         {% else %}
         <div class="info">你还没有登录，请先登录！</div>
         {% endif %}
-        <ul class="list" id="list">
+        <div  id="noComments"></div>
 
-        </ul>
+
+        <div id="messageList" id="commitList" style="display: block;">
+
+        </div>
+            <!-- <ul id="pager" class="pager">
+
+              <li class="waves-effect previous"><a href="javascript:;"><i class="material-icons">上一页</i></a></li>
+
+              <li class="active middle"><a href="javascript:;"></a></li>
+
+              <li class="waves-effect next"><a href="javascript:;"><i class="material-icons">下一页</i></a></li>
+
+            </ul> -->
     </div>
-<!-- <script src="public/js/comment.js"></script> -->
+<script src="public/js/comment.js"></script>
 {% endblock %}
