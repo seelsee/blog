@@ -2,7 +2,7 @@ const express = require('express');
       router = express.Router();
 const User = require('../models/User'),
       Category = require('../models/Category'),
-      Content = require('../models/Content')
+      Content = require('../models/Content');
 
 router.use((req, res, next) => {
   if (!req.userInfo.isAdmin) {
@@ -17,20 +17,14 @@ router.get('/', function (req, res, next) {
         userInfo: req.userInfo
     });
 })
-
 router.get('/user', function (req, res, next) {
-
     /*
     从数据库中读取用户所有数据
      */
 
-
     let page = Number(req.query.page || 1);
     let limit = 10;//一页显示几条,可手动更改
-
-
     let pages=0;
-
     //获取总记录数
     User.count().then(function (count) {
         //总页数
@@ -58,10 +52,7 @@ router.get('/user', function (req, res, next) {
 router.get('/category', (req, res) => {
   let page = Number(req.query.page || 1);
   let limit = 10;//一页显示几条,可手动更改
-
-
   let pages=0;
-
   //获取总记录数
   Category.count().then(function (count) {
       //总页数
@@ -100,7 +91,6 @@ router.post('/category/add', (req, res) => {
     res.render('admin/error', {
       userInfo: req.userInfo,
       message: '名称不能为空',
-
     })
     return;
   }
@@ -128,13 +118,7 @@ router.post('/category/add', (req, res) => {
       url: '/admin/category'
     })
   })
-
-
-
-
-
 });
-
 
 //分类修改
 router.get('/category/edit', (req, res) => {
@@ -163,7 +147,6 @@ router.get('/category/edit', (req, res) => {
 router.post('/category/edit', (req, res) => {
   let id = req.query.id || '';
   let name = req.body.name || '';
-
   //获取要修改的分类信息
   Category.findOne({
     _id: id
@@ -193,7 +176,6 @@ router.post('/category/edit', (req, res) => {
           name: name
         })
       }
-
     }
   }).then((sameCategory) => {
     if (sameCategory) {
@@ -216,9 +198,7 @@ router.post('/category/edit', (req, res) => {
       url: '/admin/category'
     });
   })
-
 })
-
 
 //分类删除
 router.get('/category/delete', (req, res) => {
@@ -238,10 +218,7 @@ router.get('/category/delete', (req, res) => {
 router.get('/content', (req, res) => {
   let page = Number(req.query.page || 1);
   const limit = 10;//一页显示几条,可手动更改
-
-
   let pages=0;
-
   //获取总记录数
   Content.count().then(function (count) {
       //总页数
@@ -250,7 +227,6 @@ router.get('/content', (req, res) => {
       page = Math.min(page, pages);
       //页码不能小于1
       page = Math.max(page, 1);
-
       let skip = (page - 1) * limit; //忽略条数
       //id 1升序 id -1降序s
       Content.find().sort({ _id: -1}).limit(limit).skip(skip).populate(['category', 'user']).sort({
@@ -275,7 +251,6 @@ router.get('/content/add', (req, res) => {
       userInfo: req.userInfo,
       categories: categories
     })
-
   })
 });
 
@@ -307,8 +282,6 @@ router.post('/content/add', (req, res) => {
   })
 })
 
-
-
 //修改内容
 router.get('/content/edit', (req, res) => {
   let contentId = req.query.id || '';
@@ -331,7 +304,6 @@ router.get('/content/edit', (req, res) => {
       }
     })
   })
-
 })
 
 //保存内容
@@ -344,7 +316,6 @@ router.post('/content/edit', (res, req) => {
     });
     return;
   }
-
   if (req.body.title == '') {
     res.render('admin/error', {
       userinfo: req.userinfo,
@@ -369,9 +340,6 @@ router.post('/content/edit', (res, req) => {
 });
 
 //内容删除
-
-
-
 router.get('/content/delete', (req, res) => {
   let contentId = req.query.id || '';
   //数据库是否已经存在该内容
@@ -396,13 +364,5 @@ router.get('/content/delete', (req, res) => {
     }
   })
 })
-
-
-
-
-
-
-
-
 
 module.exports = router;

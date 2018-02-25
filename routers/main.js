@@ -1,8 +1,7 @@
 let express = require('express'),
     router = express.Router();
 let Category = require('../models/Category'),
-    Content = require('../models/Content')
-
+    Content = require('../models/Content');
 
 let data;
 //处理通用数据
@@ -17,16 +16,14 @@ router.use((req, res, next) => {
     next();
   });
 })
+/* GET home page. */
 router.get('/', (req, res, next) => {
-
   // console.log(req.userInfo);
      data.category = req.query.category || '';
      data.count = 0;
      data.page = Number(req.query.page || 1);
      data.limit = 10;
      data.pages = 0;
-
-
   let where = {};
   if ( data.category) {
     where.category = data.category
@@ -46,17 +43,13 @@ router.get('/', (req, res, next) => {
     return Content.where(where).find().limit(data.limit).skip(skip).populate(['category', 'user']).sort({
       addTime: -1
     });
-
   }).then((contents) => {
     data.contents = contents;
     // console.log(contents);
     // console.log(data.contents);
     res.render('main/index', data);
   })
-
 });
-
-
 
 router.get('/view', (req, res) => {
   let contentId = req.query.contentid || '';
@@ -70,11 +63,5 @@ router.get('/view', (req, res) => {
     res.render('main/view', data)
   })
 });
-
-
-
-
-
-
 
 module.exports = router;

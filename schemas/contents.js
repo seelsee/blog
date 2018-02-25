@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-
 //内容的表结构
-
 module.exports= new mongoose.Schema({
   //关联字段--用户
   user: {

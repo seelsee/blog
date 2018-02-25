@@ -10,10 +10,10 @@ let express = require('express'),
     Cookies = require('cookies'),//加载cookies模块,保存登陆状态
     User = require('./models/User');
 let app = express();
-
 //静态文件托管
 app.use('/public', express.static(__dirname + '/public'));
 //配置模版
+// view engine setup
 //定义模版引擎
 app.engine('html', swig.renderFile);
 //设置模版文件存放目录
@@ -25,7 +25,12 @@ swig.setDefaults({cache: false});//取消模版缓存
 //
 //   res.render('index');//读取views目录下的文件
 // })
-
+// catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 //body-parser设置
 app.use(bodyParser.urlencoded({extended: true}))
 //设置cookie
@@ -52,14 +57,10 @@ app.use((req, res, next) => {
   }
 });
 
-
 //划分模块
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
 app.use('/', require('./routers/main'));
-
-
-
 
 //连接数据库
 mongoose.connect('mongodb://localhost:27017/blog', function (err) {
@@ -71,7 +72,5 @@ mongoose.connect('mongodb://localhost:27017/blog', function (err) {
     app.listen(port);
   }
 });
-
-
 
 console.log('starting on port ' + port);

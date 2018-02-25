@@ -11,7 +11,6 @@ router.use((req, res, next) => {
   }
   next();
 })
-
     //用户注册
 /*    注册逻辑,
     1.用户名不为空
@@ -29,7 +28,6 @@ router.post('/user/register', (req, res, next) => {
         responseData.message = '用户名不能为空';
         res.json(responseData);
         return;
-
       }
       //密码不能为空
       if (password == '') {
@@ -126,21 +124,6 @@ router.get('/comment', (req, res) => {
     })
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //评论提交
 router.post('/comment/post', (req, res) => {
   //内容id
@@ -161,18 +144,6 @@ router.post('/comment/post', (req, res) => {
     responseData.data = newContent;
     res.json(responseData);
   })
-
 });
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
