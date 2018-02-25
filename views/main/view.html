@@ -6,10 +6,10 @@
         <li>
             <h2>{{content.title}}</h2>
             <div class="title-info">
-                <span>作者:{{content.user.username}}</span>
+                <span>作者ID:{{content.user.username}}</span>
                 <span>时间:{{content.addTime|date('Y年m月d日 H:i:s', -8*60)}}</span>
                 <span>阅读:{{content.views}}</span>
-                <span>评论:10</span>
+                <span>评论:{{content.comments.length}}</span>
             </div>
             <div class="content">
                 {{content.content}}
@@ -20,7 +20,7 @@
     <div class="commentWrap">
         <div style="height: 30px">
             <span class="fl">评论</span>
-            <span class="fr">一共有<span id="commentNum"></span>条评论</span>
+            <span class="fr">一共有<span id="commentNum">{{content.user.username}}</span>条评论</span>
         </div>
         {% if userInfo._id %}
         <div class="formWrap">
@@ -38,15 +38,19 @@
         <div id="messageList" id="commitList" style="display: block;">
 
         </div>
-            <!-- <ul id="pager" class="pager">
+        <div class="pager">
+          <ul class="clear">
+            <li class="previous">
+              <a href="">上一页</a>
+            </li>
+            <li></li>
+            <li class="next">
+              <a href="">下一页</a>
+            </li>
+          </ul>
+        </div>
 
-              <li class="waves-effect previous"><a href="javascript:;"><i class="material-icons">上一页</i></a></li>
-
-              <li class="active middle"><a href="javascript:;"></a></li>
-
-              <li class="waves-effect next"><a href="javascript:;"><i class="material-icons">下一页</i></a></li>
-
-            </ul> -->
     </div>
+    <script src="/public/js/jquery-3.3.1.min.js"></script>
 <script src="public/js/comment.js"></script>
 {% endblock %}

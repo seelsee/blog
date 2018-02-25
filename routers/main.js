@@ -49,9 +49,9 @@ router.get('/', (req, res, next) => {
 
   }).then((contents) => {
     data.contents = contents;
-    // console.log(data);
+    // console.log(contents);
+    // console.log(data.contents);
     res.render('main/index', data);
-
   })
 
 });
@@ -63,8 +63,8 @@ router.get('/view', (req, res) => {
   Content.findOne({
     _id: contentId
   }).then((content) => {
-    // console.log(data);
     data.content = content;
+    // console.log(data.content);
     content.views ++;
     content.save();
     res.render('main/view', data)

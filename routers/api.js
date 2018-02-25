@@ -115,6 +115,32 @@ router.get('/user/logout', (req, res) => {
   res.json(responseData);
 })
 
+//获取文章的所有评论
+router.get('/comment', (req, res) => {
+    let contentId =  req.query.contentid || '';
+    Content.findOne({
+      _id: contentId
+    }).then((content) => {
+      responseData.data = content.comments;
+      res.json(responseData);
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //评论提交
 router.post('/comment/post', (req, res) => {
   //内容id
@@ -137,24 +163,6 @@ router.post('/comment/post', (req, res) => {
   })
 
 });
-
-
-
-
-
-
-
-
-module.exports = router;
-
-
-
-
-
-
-
-
-
 
 
 
