@@ -21,16 +21,7 @@ app.set('views','./views');
 //注册模版引擎
 app.set('view engine', 'html');
 swig.setDefaults({cache: false});//取消模版缓存
-// app.get('/', (req, res, next)=> {
-//
-//   res.render('index');//读取views目录下的文件
-// })
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
+
 //body-parser设置
 app.use(bodyParser.urlencoded({extended: true}))
 //设置cookie
@@ -61,6 +52,26 @@ app.use((req, res, next) => {
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
 app.use('/', require('./routers/main'));
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use((err, req, res, next) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error.html');
+});
+
+
 
 //连接数据库
 mongoose.connect('mongodb://localhost:27017/blog', function (err) {
