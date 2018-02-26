@@ -1,14 +1,12 @@
-/*
-入口文件
-*/
-//创建app服务;
+
 const express = require('express'),
       swig = require('swig'), //加载模版
       mongoose = require('mongoose'),//加载数据库
       bodyParser = require('body-parser'),//加载body-parser,处理post提交的数据
       Cookies = require('cookies'),//加载cookies模块,保存登陆状态
       User = require('./models/User');
-const port = 8000;//启动端口号
+const env = process.env.NODE_ENV || 'development';
+const port = process.env.PORT || 8000;//启动端口号
 const app = express();
 //静态文件托管
 app.use('/public', express.static(__dirname + '/public'));
@@ -72,14 +70,17 @@ app.use((err, req, res, next) => {
 
 
 //连接数据库
-mongoose.connect('mongodb://localhost:27017/blog', function (err) {
+mongoose.connect('mongodb://localhost:27017/blog', (err) => {
   if(err) {
-    console.log('数据库链接失败');
+    console.log('unable to connect to database');
   } else {
     console.log('数据库链接成功');
-    //监听http请求,port 端口
-    app.listen(port, () => {
-      console.log('listening on port ' + port);
-    });
   }
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+app.listen(port, () => {
+  console.log('listening on port ' + port);
 });
