@@ -8,7 +8,172 @@
   /* margin-top: -150px; */
   z-index: 100;
 }
-.nowUp, .nowIn {
+.nowUp,
+.nowIn {
   color: red;
-
+}
+body {
+  background: rgba(238, 238, 238, 0.5) !important;
+}
+.clearfix {
+  clear: both;
+}
+header {
+  position: relative;
+  height: 200px;
+  z-index: 999;
+  width: 100%;
+  background: url('/public/img/autumn.jpg') center 0px repeat-x;
+  background-size: cover;
+}
+header .navbar {
+  position: absolute;
+  margin-bottom: 0;
+  bottom: 0;
+  width: 100%!important;
+  border-bottom: 4px solid #03A9F4;
+  clear: both;
+  height: 62px;
+  background-color: #4a4a4a;
+  opacity: .9;
+}
+header .navbar .nav {
+  position: relative;
+  left: 0;
+  display: block;
+  margin: 0 auto;
+  max-width: 1226px;
+  font-size: 16px;
+}
+header .navbar .nav li {
+  position: relative;
+  float: left;
+  display: block;
+  margin-right: 1px;
+  width: auto;
+  min-width: 75px;
+  text-align: center;
+  line-height: 37px;
+  background: #4a4a4a;
+}
+header .navbar .nav li a {
+  color: #fff;
+}
+.container {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1226px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.container .content-wrap {
+  float: left;
+  width: 100%;
+}
+.container .content-wrap .content {
+  float: left;
+  margin-right: 370px;
+  width: 800px;
+}
+.container .content-wrap .sidebar {
+  position: relative;
+  float: left;
+  margin-left: -360px;
+  width: 200px;
+}
+.container:after,
+.header:after {
+  clear: both;
+}
+.listBox {
+  position: relative;
+  clear: both;
+  margin-bottom: 10px;
+  padding: 20px 15px 20px 20px;
+  background-color: #fff;
+}
+.listBox .title {
+  margin: 0 10px 15px 0;
+}
+.listBox .title h1 {
+  position: relative;
+  top: 1px;
+  display: inline;
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+}
+.listBox .title h1 a {
+  color: #00a67c;
+  text-decoration: none;
+}
+.listBox .note {
+  margin-bottom: 0;
+  color: #777;
+  line-height: 24px;
+}
+.listBox .note a {
+  color: #00a67c;
+  text-decoration: none;
+}
+.listBox .auth-span {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  float: right;
+}
+.i-last {
+  float: left;
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  margin-top: 8px;
+}
+.i-next {
+  float: right;
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  margin-top: -10px;
+}
+.i-page {
+  display: inline-block;
+  height: auto;
+  width: auto;
+  position: relative;
+  margin: 0 auto;
+  margin-left: 250px;
+}
+.i-focus {
+  background: #03A9F4;
+}
+.view-header {
+  padding: 2px 20px 12px;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+}
+.view-header .view-title {
+  margin: 5px 0;
+  color: inherit;
+  font-weight: 700;
+  line-height: 35px;
+  color: #444;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 60px;
+}
+.view-header .view-content {
+  text-indent: 0;
+  position: relative;
+  padding: 10px 20px 20px 20px;
+  background-color: #fff;
+  word-wrap: break-word;
+  font-size: 15px;
+  line-height: 26px;
+  word-break: break-all;
 }

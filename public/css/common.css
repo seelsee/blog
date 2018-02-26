@@ -7,7 +7,7 @@ html, body {
 	padding: 0;
 	font-size: 12px;
 	font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif;
-	background: #fff;
+	/* background: #fff; */
 	color: #222;
 }
 ol, ul, li, h1, h2, h3, h4, h5, h6 {

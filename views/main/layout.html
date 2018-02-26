@@ -5,44 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>blog</title>
+  <link rel="stylesheet" href="/public/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/css/bootstrap-theme.css">
   <link rel="stylesheet" href="/public/css/common.css">
   <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body>
-
-  <div class="meau"></div>
-  <a href="/">首页</a>
-  {% for cate in categories %}
-  <a href="/?category={{cate.id}}">{{cate.name}}</a>
-  {% endfor %}
-
-
-  <div class="mainLeft">
-  {% block content %}{% endblock %}
-
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <header>
+      <div class="navbar">
+        <ul class="nav">
+          <li>
+            {% if category == '' %}
+            <a href="/" class="navigation i-focus">首页</a>
+            {% else %}
+            <a href="/" class="navigation">首页</a>
+            {% endif %}
+          </li>
+            {% for cate in categories %}
+              <li>
+                {% if category == cate.id %}
+                <a href="/?category={{cate.id}}" class="navigation i-focus">{{cate.name}}</a>
+                {% else %}
+                <a href="/?category={{cate.id}}" class="navigation">{{cate.name}}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+        </ul>
+      </div>
+  </header>
+<div class="container">
 
 
+  <div class="content-wrap">
+    <div class="content">
+      {% block content %}{% endblock %}
+
+    </div>
 
 
-
-
-
-  {% if userInfo._id %}
-  <div class="rightBox" id="userInfo">
+    <div class="sidebar">
+      {% if userInfo._id %}
+      <div class="rightBox" id="userInfo">
             <div class="title"><span>用户信息</span></div>
             <p><span class="colDark username">{{userInfo.username}}</span></p>
             {% if userInfo.isAdmin %}
@@ -53,9 +56,9 @@
             {% endif %}
 
             <p><span class="colDark" ><a href="javascript:;" id="logout">退出</a></span></p>
-    </div>
-  {% else %}
-  <div class="rightBox" id="loginBox" >
+      </div>
+      {% else %}
+      <div class="rightBox" id="loginBox" >
         <div class="title"><span>登录</span></div>
         <div><span>用户名：</span><input type="text" name="username" id="inuser"/><em></em></div>
         <div><span>密码：</span><input type="password" name="password" id="inpassword"><em></em></div>
@@ -64,7 +67,7 @@
         </div>
         <p class="textRight">还没注册？<a href="javascript:;" class="nowUp">马上注册</a></p>
         <p class="loginWarning"></p>
-    </div>
+      </div>
 
         <div class="rightBox" id="registerBox" style="display: none">
         <div class="title"><span>注册</span></div>
@@ -76,8 +79,14 @@
         </div>
         <p class="textRight">已有账号？<a href="javascript:;" class="nowIn">马上登录</a></p>
         <p class="reWarning"></p>
-    </div>
+      </div>
     {%endif%}
+
+
+    </div>
+  </div>
+</div>
+
     <script src="/public/js/jquery-3.3.1.min.js"></script>
     <script src="/public/js/index.js"></script>
 

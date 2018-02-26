@@ -3,36 +3,48 @@
 
 {% for content in contents %}
   <div class="listBox">
-    <h1>{{content.title}}</h1>
-    <p>
+    <div class="title">
+      <h1>
+        <a href="/view?contentid={{content.id}}">{{content.title}}</a>
+      </h1>
+
+    </div>
+    <span class="note">
+        <p>{{content.description}}</p>
+        <a href="/view?contentid={{content.id}}">继续阅读</a>
+    </span>
+
+    <p class="auth-span">
       作者: <span>{{content.user.username}}</span>
       时间: <span>{{content.addTime|date('Y年m月d日 H:i:s', -8*60)}}</span>
       阅读: <span>{{content.views}}</span>
-      评论: <span>10</span>
-      <div><p>{{content.description}}</p></div>
-      <div><a href="/view?contentid={{content.id}}">阅读全文</a></div>
+      评论: <span>{{content.comments.length}}</span>
     </p>
   </div>
   {% endfor %}
 
+
+
+
+
   <ul class="mainIndexPagination">
     <li>
         {% if page<=1 %}
-        <span>没有上一页了</span>
+        <span class="i-last">没有上一页了</span>
         {% else %}
-        <a href="/?category={{category}}&page={{page-1}}">上一页</a>
+        <a href="/?category={{category}}&page={{page-1}}" class="i-last">上一页</a>
         {% endif %}
       </li>
       {% if pages > 0 %}
-      <li>{{page}}/{{pages}}</li>
+      <li class="page">{{page}}/{{pages}}</li>
       {% else %}
       <div>当前分页没有内容</div>
       {% endif %}
       <li>
          {% if page>= pages %}
-          <span>没有下一页了</span>
+          <span class="i-next">没有下一页了</span>
          {% else %}
-         <a href="/?category={{category}}&page={{page+1}}">下一页</a>
+         <a href="/?category={{category}}&page={{page+1}}" class="i-next">下一页</a>
          {% endif %}
       </li>
    </ul>

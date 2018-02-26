@@ -1,15 +1,15 @@
 /*
 入口文件
 */
-const port = 8000;//启动端口号
 //创建app服务;
-let express = require('express'),
-    swig = require('swig'), //加载模版
-    mongoose = require('mongoose'),//加载数据库
-    bodyParser = require('body-parser'),//加载body-parser,处理post提交的数据
-    Cookies = require('cookies'),//加载cookies模块,保存登陆状态
-    User = require('./models/User');
-let app = express();
+const express = require('express'),
+      swig = require('swig'), //加载模版
+      mongoose = require('mongoose'),//加载数据库
+      bodyParser = require('body-parser'),//加载body-parser,处理post提交的数据
+      Cookies = require('cookies'),//加载cookies模块,保存登陆状态
+      User = require('./models/User');
+const port = 8000;//启动端口号
+const app = express();
 //静态文件托管
 app.use('/public', express.static(__dirname + '/public'));
 //配置模版
@@ -43,7 +43,6 @@ app.use((req, res, next) => {
       next();
     } finally {}
   } else {
-
     next();
   }
 });
@@ -72,7 +71,6 @@ app.use((err, req, res, next) => {
 });
 
 
-
 //连接数据库
 mongoose.connect('mongodb://localhost:27017/blog', function (err) {
   if(err) {
@@ -80,8 +78,8 @@ mongoose.connect('mongodb://localhost:27017/blog', function (err) {
   } else {
     console.log('数据库链接成功');
     //监听http请求,port 端口
-    app.listen(port);
+    app.listen(port, () => {
+      console.log('listening on port ' + port);
+    });
   }
 });
-
-console.log('starting on port ' + port);

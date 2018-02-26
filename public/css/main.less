@@ -1,0 +1,217 @@
+.rightBox {
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+}
+#loginBox {
+  position: relative;
+  /* margin-top: -150px; */
+  z-index: 100;
+}
+.nowUp, .nowIn {
+  color: red;
+
+}
+
+
+body {
+  background: rgba(238, 238, 238, 0.5)!important;
+}
+.clearfix {
+  clear: both;
+}
+header {
+  position: relative;
+  height:  200px;
+  z-index: 999;
+  width: 100%;
+  background: url('/public/img/autumn.jpg') center 0px repeat-x;
+  background-size: cover;
+
+    .navbar {
+      position: absolute;
+      margin-bottom: 0;//消除bootstrap样式
+      bottom: 0;
+      width: 100%!important;
+      border-bottom: 4px solid #03A9F4;
+      clear: both;
+      height: 62px;
+      background-color: #4a4a4a;
+      opacity: .9;
+      .nav {
+        position: relative;
+        left: 0;
+        display: block;
+        margin: 0 auto;
+        max-width: 1226px;
+        font-size: 16px;
+        li {
+
+          position: relative;
+          float: left;
+          display: block;
+          margin-right: 1px;
+          width: auto;
+          min-width: 75px;
+          text-align: center;
+          line-height: 37px;
+          background: #4a4a4a;
+          a {
+            color: #fff;
+          }
+        }
+
+      }
+    }
+}
+
+
+
+.container {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1226px;
+  text-align: left;
+  margin-bottom: 10px;
+  .content-wrap {
+    float: left;
+    width: 100%;
+    .content {
+      float: left;
+      margin-right: 370px;
+      width: 800px;
+      // height: 2000px;
+    }
+    .sidebar {
+      position: relative;
+      float: left;
+      margin-left: -360px;
+      width: 200px;
+
+    }
+  }
+}
+
+.container:after, .header:after {
+    clear: both;
+}
+
+//index.html
+.listBox {
+  position: relative;
+  clear: both;
+  margin-bottom: 10px;
+  padding: 20px 15px 20px 20px;
+  background-color: #fff;
+  .title {
+    margin: 0 10px 15px 0;
+    h1 {
+      position: relative;
+      top: 1px;
+      display: inline;
+      margin: 0;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 25px;
+      a {
+        color: #00a67c;
+        text-decoration: none;
+      }
+    }
+
+  }
+  .note {
+    margin-bottom: 0;
+    color: #777;
+    line-height: 24px;
+    a {
+      color: #00a67c;
+      text-decoration: none;
+    }
+  }
+  .auth-span {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    float: right;
+  }
+}
+
+
+
+.i-last {
+  // height: 30px;
+  // width: 80px;
+  float: left;
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  margin-top: 8px;
+}
+.i-next {
+  float: right;
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  margin-top: -10px;
+}
+.i-page {
+  display: inline-block;
+  height: auto;
+  width: auto;
+  position: relative;
+  margin: 0 auto;
+  margin-left: 250px;
+}
+
+.i-focus {
+background: #03A9F4;
+}
+
+
+
+
+//view.html
+
+.view-header {
+  padding: 2px 20px 12px;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+  .view-title {
+    margin: 5px 0;
+    color: inherit;
+    font-weight: 700;
+    line-height: 35px;
+    color: #444;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 60px;
+  }
+  .view-content {
+    text-indent: 0;
+    position: relative;
+    padding: 10px 20px 20px 20px;
+    background-color: #fff;
+    word-wrap: break-word;
+    font-size: 15px;
+    line-height: 26px;
+    word-break: break-all;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+div {
+
+}

@@ -2,20 +2,20 @@
 
 
 {% block content %}
-    <ul class="articleWrap">
-        <li>
-            <h2>{{content.title}}</h2>
-            <div class="title-info">
-                <span>作者ID:{{content.user.username}}</span>
+    <div class="view-header">
+        <div>
+            <h2 class="view-title">{{content.title}}</h2>
+            <div>
+                <span>作者ID:{{content.user.toString()}}</span>
                 <span>时间:{{content.addTime|date('Y年m月d日 H:i:s', -8*60)}}</span>
                 <span>阅读:{{content.views}}</span>
                 <span>评论:{{content.comments.length}}</span>
             </div>
-            <div class="content">
+            <div class="view-content">
                 {{content.content}}
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 
     <div class="commentWrap">
         <div style="height: 30px">
@@ -25,7 +25,7 @@
         {% if userInfo._id %}
         <div class="formWrap">
             <input type="hidden" id="contentId" value="{{content.id}}">
-            <textarea  rows="3" class="form-control" name="content" id="messageContent"></textarea>
+            <textarea  placeholder="说点什么吧…"  rows="3" class="form-control" name="content" id="messageContent"></textarea>
 
             <button type="button" class="btn btn-primary" id="submitComment">提交</button>
         </div>
