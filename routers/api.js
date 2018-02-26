@@ -16,7 +16,8 @@ router.use((req, res, next) => {
     1.用户名不为空
     2.密码不为空
     3.两次输入密码一致
-    用户是否注册
+    用户是否注册,
+    未防止sql注入
     */
 router.post('/user/register', (req, res, next) => {
   let username = req.body.username,
@@ -128,11 +129,14 @@ router.get('/comment', (req, res) => {
 router.post('/comment/post', (req, res) => {
   //内容id
   let contentId =  req.body.contentid || '';
+  //简单处理XSS
+  reqBodyContent = htmlEncode(req.body.content);
   let postData = {
     username: req.userInfo.username,
     postTime: new Date(),
-    content: req.body.content
+    content: reqBodyContent
   };
+  // console.log(postData.content);
   //查询当前这篇内容的信息
   Content.findOne({
     _id: contentId
@@ -145,5 +149,15 @@ router.post('/comment/post', (req, res) => {
     res.json(responseData);
   })
 });
-
+//简单处理XSS
+function htmlEncode(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/ /g, '&nbsp;')
+    .replace(/\'/g, '&#39;')
+    .replace(/\"/g, '&quot;')
+    .replace(/\n/g, '<br>');
+}
 module.exports = router;

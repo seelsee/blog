@@ -10,12 +10,12 @@ let submitComment = document.querySelector('#submitComment'),
     let comments = [];
 //提交评论
 submitComment.addEventListener('click', () => {
-
+   contentIdValue = htmlEncode(contentId.value)
   $.ajax({
     type: 'POST',
     url: '/api/comment/post',
     data: {
-      contentid: contentId.value,
+      contentid: contentIdValue,
       content: messageContent.value
     },
     dataType:'json',
@@ -94,4 +94,15 @@ function TimeConversion(time) {
   let date1 = new Date(time);
   return date1.getFullYear() + '年' + (date1.getMonth() + 1) + '月' + date1.getDate() + '日' +
     date1.getHours() + ':' + date1.getMinutes() + ':' + date1.getSeconds();
+}
+// 对用户的提交进行编码,简单处理XSS
+function htmlEncode(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/ /g, '&nbsp;')
+    .replace(/\'/g, '&#39;')
+    .replace(/\"/g, '&quot;')
+    .replace(/\n/g, '<br>');
 }
