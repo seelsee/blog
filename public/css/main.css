@@ -187,10 +187,12 @@ header .navbar .nav li a {
   margin-right: 5px;
   width: 100px;
   height: 30px;
+  text-align: center;
   background: #00a1d6;
   color: #fff;
   border: none;
   border-radius: 5px;
+  line-height: 30px;
 }
 .view-header {
   padding: 2px 20px 12px;

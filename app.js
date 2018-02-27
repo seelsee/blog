@@ -4,7 +4,8 @@ const express = require('express'),
       mongoose = require('mongoose'),//加载数据库
       bodyParser = require('body-parser'),//加载body-parser,处理post提交的数据
       Cookies = require('cookies'),//加载cookies模块,保存登陆状态
-      User = require('./models/User');
+      User = require('./models/User'),
+      setting = require('./models/setting.js')
 const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT || 8000;//启动端口号
 const app = express();
@@ -70,7 +71,7 @@ app.use((err, req, res, next) => {
 
 
 //连接数据库
-mongoose.connect('mongodb://localhost:27017/blog', (err) => {
+mongoose.connect(setting.dburl, (err, db) => {
   if(err) {
     console.log('unable to connect to database');
   } else {

@@ -46,7 +46,7 @@
     <div class="sidebar">
       {% if userInfo._id %}
       <div class="rightBox" id="userInfo">
-            <div class="title"><span>用户信息</span></div>
+            <div class="title l-title"><span>用户信息</span></div>
             <p><span class="colDark username">{{userInfo.username}}</span></p>
             {% if userInfo.isAdmin %}
             <span class="colDanger">你好，管理员！</span>
@@ -55,7 +55,7 @@
             <span class="colDanger">你好，欢迎光临我的博客！</span>
             {% endif %}
 
-            <p><span class="colDark" ><a href="javascript:;" id="logout">退出</a></span></p>
+            <p class="l-log-style"><span><a href="javascript:;" id="logout">退出</a></span></p>
       </div>
       {% else %}
       <div class="rightBox" id="loginBox" >

@@ -1,7 +1,8 @@
 let express = require('express');
     router = express.Router();
 let User = require('../models/User'),
-    Content = require('../models/Content');
+    Content = require('../models/Content'),
+    md5 = require('../models/md5');
 //统一返回格式
 let responseData;
 router.use((req, res, next) => {
@@ -58,9 +59,11 @@ router.post('/user/register', (req, res, next) => {
           return;
         }
         //保存用户注册信息到数据库中
+        //简单md5加密
+        let md5password = md5(md5(password).substr(4,7) + md5(password));
         let user = new User({
           username: username,
-          password: password
+          password: md5password
         });
         return user.save();
       }).then(function(newUserInfo) {
@@ -81,10 +84,12 @@ router.post('/user/login', function(req, res) {
     return;
   }
   //查询数据库中相同用户名和密码,存在并一致
+  //简单md5加密
+  let md5password = md5(md5(password).substr(4,7) + md5(password));
   User.findOne({
     username: username,
-    password: password
-  }).then(function(userInfo) {
+    password: md5password
+  }).then((userInfo) => {
     if (!userInfo) {
       responseData.code = 2;
       responseData.message = '用户名或者密码错误';
