@@ -52,13 +52,12 @@ if (nowIn !== null) {
             registerBox.style.display = 'none';
           }, 1000)
         }
-
       }
     })
   })
   //登陆
   login.addEventListener('click', () => {
-    console.log(upuser.value);
+    // console.log(upuser.value);
     $.ajax({
       type: 'post',
       url: '/api/user/login',

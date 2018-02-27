@@ -59,26 +59,28 @@
       </div>
       {% else %}
       <div class="rightBox" id="loginBox" >
-        <div class="title"><span>登录</span></div>
-        <div><span>用户名：</span><input type="text" name="username" id="inuser"/><em></em></div>
-        <div><span>密码：</span><input type="password" name="password" id="inpassword"><em></em></div>
-        <div><span></span>
-            <button class="login">登 录</button>
+        <div class="title l-title"><span>登录</span></div>
+        <div><span class="l-user-fs">用户名：</span><input type="text" name="username" id="inuser" placeholder="你的用户名"><em></em></div>
+        <div><span class="l-user-fs">密码：</span><input type="password" name="password" id="inpassword" placeholder="密码"><em></em></div>
+        <div class="l-logBox">
+          <span></span>
+            <button class="login l-log-style">登 录</button>
         </div>
         <p class="textRight">还没注册？<a href="javascript:;" class="nowUp">马上注册</a></p>
         <p class="loginWarning"></p>
       </div>
 
         <div class="rightBox" id="registerBox" style="display: none">
-        <div class="title"><span>注册</span></div>
-        <div><span>用户名：</span><input type="text" name="username" id="upuser"></div>
-        <div><span>密码：</span><input type="password" name="password" id="password"</div>
-        <div><span>确认：</span><input type="password" name="repassword" id="repassword"></div>
-        <div><span></span>
-            <button class="register">注 册</button>
-        </div>
-        <p class="textRight">已有账号？<a href="javascript:;" class="nowIn">马上登录</a></p>
-        <p class="reWarning"></p>
+          <div class="title l-title"><span>注册</span></div>
+          <div><span class="l-user-fs">用户名：</span><input type="text" name="username" id="upuser" placeholder="你的用户名"></div>
+          <div><span class="l-user-fs">密码：</span><input type="password" name="password" id="password" placeholder="密码"></div>
+          <div><span class="l-user-fs">确认：</span><input type="password" name="repassword" id="repassword" placeholder="再次输入密码"></div>
+          <div class="l-logBox">
+            <span></span>
+            <button class="register l-log-style">注 册</button>
+          </div>
+          <p class="textRight">已有账号？<a href="javascript:;" class="nowIn">马上登录</a></p>
+          <p class="reWarning"></p>
       </div>
     {%endif%}
 
