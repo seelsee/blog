@@ -1,7 +1,7 @@
-let express = require('express'),
-    router = express.Router();
-let Category = require('../models/Category'),
-    Content = require('../models/Content');
+const express = require('express'),
+      router = express.Router();
+const Category = require('../models/Category'),
+      Content = require('../models/Content');
 
 let data;
 //处理通用数据

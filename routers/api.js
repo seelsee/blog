@@ -1,8 +1,8 @@
-let express = require('express');
-    router = express.Router();
-let User = require('../models/User'),
-    Content = require('../models/Content'),
-    md5 = require('../models/md5');
+const express = require('express');
+      router = express.Router();
+const User = require('../models/User'),
+      Content = require('../models/Content'),
+      md5 = require('../config/md5');
 //统一返回格式
 let responseData;
 router.use((req, res, next) => {
