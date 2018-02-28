@@ -1,7 +1,8 @@
 const express = require('express'),
       router = express.Router();
 const Category = require('../models/Category'),
-      Content = require('../models/Content');
+      Content = require('../models/Content'),
+      markdown = require('markdown').markdown;
 
 let data;
 //处理通用数据
@@ -45,7 +46,6 @@ router.get('/', (req, res, next) => {
     });
   }).then((contents) => {
     data.contents = contents;
-    // console.log(contents);
     // console.log(data.contents);
     res.render('main/index', data);
   })
@@ -59,8 +59,14 @@ router.get('/view', (req, res) => {
     data.content = content;
     // console.log(data.content);
     content.views ++;
-    content.save();
-    res.render('main/view', data)
+    return content.save();
+
+  }).then(() => {
+    //markdown转html
+    // console.log(data.content.content);
+    data.content.content = markdown.toHTML(data.content.content);
+    // console.log(data.content.content);
+    res.render('main/view', data);
   })
 });
 

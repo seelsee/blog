@@ -13,7 +13,7 @@ router.use((req, res, next) => {
   }
   next();
 })
-router.get('/', function (req, res, next) {
+router.get('/',(req, res, next) => {
     res.render('admin/index.html', {
         userInfo: req.userInfo
     });
@@ -55,7 +55,7 @@ router.get('/category', (req, res) => {
   let limit = 10;//一页显示几条,可手动更改
   let pages=0;
   //获取总记录数
-  Category.count().then(function (count) {
+  Category.count().then((count) => {
       //总页数
       pages =Math.ceil(count / limit);
       //页码不能超过总页数

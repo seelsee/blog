@@ -12,7 +12,7 @@
                 <span>评论:{{content.comments.length}}</span>
             </div>
             <div class="view-content">
-                {{content.content}}
+                {% autoescape false %}{{content.content}}{% endautoescape %}
             </div>
         </div>
     </div>

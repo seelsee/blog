@@ -18,7 +18,8 @@ module.exports = (app) => {
   //注册模版引擎
   app.set('view engine', 'html');
   swig.setDefaults({cache: false});//取消模版缓存
-
+  //{% autoescape false %}{{content.content}}{% endautoescape %}指定不转义
+  // swig.setDefaults({ autoescape: true });
   //body-parser设置
   app.use(bodyParser.urlencoded({extended: true}))
   //设置cookie

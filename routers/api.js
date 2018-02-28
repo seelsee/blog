@@ -157,12 +157,12 @@ router.post('/comment/post', (req, res) => {
 //简单处理XSS
 function htmlEncode(str) {
   return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/ /g, '&nbsp;')
-    .replace(/\'/g, '&#39;')
-    .replace(/\"/g, '&quot;')
-    .replace(/\n/g, '<br>');
+    // .replace(/&/g, '&amp;')
+    // .replace(/</g, '&lt;')
+    // .replace(/>/g, '&gt;')
+    // .replace(/ /g, '&nbsp;')
+    // .replace(/\'/g, '&#39;')
+    // .replace(/\"/g, '&quot;')
+    // .replace(/\n/g, '<br>');
 }
 module.exports = router;
