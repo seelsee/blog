@@ -97,3 +97,140 @@ if (nowUp == null) {
     })
   })
 }
+//前端样式
+
+function getLength (str){
+	return str.replace(/[^\x00-xff]/g,"xx").length;
+}
+function findStr(str,n){
+	var tmp = 0;
+	for (var i = 0; i < str.length; i++) {
+		if (str.charAt(i)==n) {
+			tmp++;
+		}
+	}
+	return tmp;
+}
+
+//注册
+let reUserMsg = document.querySelector('.reUserMsg'),
+    count = document.querySelector('.count');
+let name_length = 0;
+console.log(reUserMsg);
+upuser.onfocus = function() {
+  reUserMsg.style.display = "block";
+}
+upuser.onkeyup = function (){
+	count.style.visibility="visible";
+	name_length=getLength(this.value);
+	count.innerHTML = name_length+"个字符";
+	if (name_length==0) {
+		count.style.visibility="hidden";
+	}
+}
+upuser.onblur = function() {
+  //含有非法字符
+	var re = /[^\w\u4e00-\u9fa5]/g;
+	if (re.test(this.value)) {
+		reUserMsg.innerHTML = '含有非法字符！';
+	}
+	//不能为空
+	else if(this.value==""){
+		reUserMsg.innerHTML = '不能为空！';
+	}
+	//长度超过25个字符
+	else if (name_length>25){
+		reUserMsg.innerHTML = '长度超过25个字符!';
+	}
+	//长度少于六个字符
+	else if (name_length<6){
+		reUserMsg.innerHTML = '长度少于6个字符!';
+	}
+	//OK
+	else {
+		reUserMsg.innerHTML = 'OK!';
+	}
+}
+let rePwdMsg = document.querySelector('.rePwdMsg');
+uppassword.onfocus = function () {
+  rePwdMsg.style.display = "block";
+	rePwdMsg.innerHTML = '6-16个字符，请使用字母加数字或符号的组合密码，不能单独使用字母、数字或符号。'
+}
+uppassword.onblur = function () {
+  let m = findStr(uppassword.value,uppassword.value[0]);
+	let re_n = /[^\d]/g;
+	let re_t = /[^a-zA-Z]/g;
+//不能为空
+	if (this.value=="") {
+		rePwdMsg.innerHTML = '密码不能为空！';
+	}
+//不能用相同字符
+	else if (m==this.value.length){
+		rePwdMsg.innerHTML = '不能用相同字符';
+	}
+//长度应为6-16个字符
+	else if(this.value.length<6 || this.value.length>16){
+		rePwdMsg.innerHTML = '长度应为6-16个字符';
+	}
+//不能全为数字
+	else if (!re_n.test(this.value)) {
+		rePwdMsg.innerHTML = '不能全为数字';
+	}
+//不能全为字母
+	else if (!re_t.test(this.value)) {
+		rePwdMsg.innerHTML = '不能全为字母';
+	}
+//OK
+	else{
+		rePwdMsg.innerHTML = 'OK';
+	}
+}
+
+
+let rePwdMsg2 = document.querySelector('.rePwdMsg2');
+reuppassword.onblur = function() {
+  if(this.value != uppassword.value){
+		rePwdMsg2.innerHTML = '两次输入的密码不一致';
+
+	}
+	else{
+		rePwdMsg2.innerHTML = 'OK';
+	}
+}
+
+
+
+//登陆
+let inUserMsg = document.querySelector('.inUserMsg'),
+    inPwdMsg =  document.querySelector('.inPwdMsg');
+
+//用户名
+inuser.onblur = function () {
+  //不能为空
+if(this.value==""){
+		inUserMsg.style.display = "block";
+		inUserMsg.innerHTML = '请输入用户名呀！';
+	}
+	//OK
+	else {
+		inUserMsg.style.display = "none";
+	}
+}
+//密码
+inpassword.onblur = function () {
+  //不能为空，长度应为6-16个字符
+  	if (this.value=="" || this.value.length<6 || this.value.length>16) {
+  		inPwdMsg.style.display = "block";
+  		inPwdMsg.innerHTML = '密码位数不对';
+  	}
+  //OK
+  	else{
+  		inPwdMsg.style.display = "none";
+  	}
+}
+
+
+
+
+
+//

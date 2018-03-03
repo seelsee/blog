@@ -60,27 +60,33 @@
       {% else %}
       <div class="rightBox" id="loginBox" >
         <div class="title l-title"><span>登录</span></div>
-        <div><span class="l-user-fs">用户名：</span><input type="text" name="username" id="inuser" placeholder="你的用户名"><em></em></div>
+        <div><span class="l-user-fs">用户名：</span><input type="text" name="username" id="inuser" placeholder="你的用户名"></div>
+        <p class="inUserMsg red"></p>
         <div><span class="l-user-fs">密码：</span><input type="password" name="password" id="inpassword" placeholder="密码"><em></em></div>
+        <p class="inPwdMsg red"></p>
         <div class="l-logBox">
           <span></span>
             <button class="login l-log-style">登 录</button>
         </div>
         <p class="textRight">还没注册？<a href="javascript:;" class="nowUp">马上注册</a></p>
-        <p class="loginWarning"></p>
+        <p class="loginWarning red"></p>
       </div>
 
         <div class="rightBox" id="registerBox" style="display: none">
           <div class="title l-title"><span>注册</span></div>
           <div><span class="l-user-fs">用户名：</span><input type="text" name="username" id="upuser" placeholder="你的用户名"></div>
+          <p class="reUserMsg red" style="display: none">请输入用户名</p>
+				  <span class="count red">0个字符</span>
           <div><span class="l-user-fs">密码：</span><input type="password" name="password" id="password" placeholder="密码"></div>
+          <p class="rePwdMsg red" style="display: none"></p>
           <div><span class="l-user-fs">确认：</span><input type="password" name="repassword" id="repassword" placeholder="再次输入密码"></div>
+          <p class="rePwdMsg2 red"></p>
           <div class="l-logBox">
             <span></span>
             <button class="register l-log-style">注 册</button>
           </div>
           <p class="textRight">已有账号？<a href="javascript:;" class="nowIn">马上登录</a></p>
-          <p class="reWarning"></p>
+          <p class="reWarning red"></p>
       </div>
     {%endif%}
 

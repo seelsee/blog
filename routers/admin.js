@@ -27,7 +27,7 @@ router.get('/user', function (req, res, next) {
     let limit = 10;//一页显示几条,可手动更改
     let pages=0;
     //获取总记录数
-    User.count().then(function (count) {
+    User.count().then((count) => {
         //总页数
         pages =Math.ceil(count / limit);
         //页码不能超过总页数
@@ -37,7 +37,7 @@ router.get('/user', function (req, res, next) {
 
         let skip = (page - 1) * limit; //忽略条数
 
-        User.find().limit(limit).skip(skip).then(function (users) {
+        User.find().limit(limit).skip(skip).then((users) => {
             res.render('admin/user_index.html', {
                 userInfo: req.userInfo,
                 users: users,

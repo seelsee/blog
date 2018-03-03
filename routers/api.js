@@ -2,7 +2,8 @@ const express = require('express');
       router = express.Router();
 const User = require('../models/User'),
       Content = require('../models/Content'),
-      md5 = require('../config/md5');
+      md5 = require('../tools/md5'),
+      xss = require('../tools/xss');
 //统一返回格式
 let responseData;
 router.use((req, res, next) => {
@@ -18,7 +19,6 @@ router.use((req, res, next) => {
     2.密码不为空
     3.两次输入密码一致
     用户是否注册,
-    未防止sql注入
     */
 router.post('/user/register', (req, res, next) => {
   let username = req.body.username,
@@ -45,6 +45,14 @@ router.post('/user/register', (req, res, next) => {
         res.json(responseData);
         return;
       }
+      //防止用户名非法字符
+      let re = /[^\w\u4e00-\u9fa5]/g;
+	    if (re.test(username)) {
+        responseData.code = 4;
+        responseData.message = '用户名含有非法字符';
+        res.json(responseData);
+        return;
+	     }
       //用户名是否已经被注册,查询数据库
       //参考 http://mongoosejs.com/docs/api.html#Model
       User.findOne({
@@ -135,7 +143,7 @@ router.post('/comment/post', (req, res) => {
   //内容id
   let contentId =  req.body.contentid || '';
   //简单处理XSS
-  reqBodyContent = htmlEncode(req.body.content);
+  reqBodyContent = xss(req.body.content);
   let postData = {
     username: req.userInfo.username,
     postTime: new Date(),
@@ -154,15 +162,7 @@ router.post('/comment/post', (req, res) => {
     res.json(responseData);
   })
 });
-//简单处理XSS
-function htmlEncode(str) {
-  return str
-    // .replace(/&/g, '&amp;')
-    // .replace(/</g, '&lt;')
-    // .replace(/>/g, '&gt;')
-    // .replace(/ /g, '&nbsp;')
-    // .replace(/\'/g, '&#39;')
-    // .replace(/\"/g, '&quot;')
-    // .replace(/\n/g, '<br>');
-}
+
+//注册防止非法字符
+
 module.exports = router;
